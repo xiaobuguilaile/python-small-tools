@@ -13,10 +13,9 @@ from datetime import datetime
 def Main():
 
     source_dir = 'ftp_Title_Content_Corpus20200726.csv'
-    target_dir = 'origin/'
+    target_dir = 'origin/'  # 接受拆分文件的文件夹
 
-    # 计数器
-    flag = 0
+    flag = 0   # 计数器，用于控制多少行分成一个文件
 
     name = 1  # 文件名
 
@@ -30,15 +29,15 @@ def Main():
             flag += 1
             dataList.append(line)
             if flag == 100000:
-                with open(target_dir + "pass_" + str(name) + ".txt", 'w+') as f_target:
+                with open(target_dir + "ftp_" + str(name) + ".txt", 'w+', encoding='utf-8') as f_target:
                     for data in dataList:
                         f_target.write(data)
                 name += 1
                 flag = 0
                 dataList = []
 
-    # 处理最后一批行数少于200万行的
-    with open(target_dir + "pass_" + str(name) + ".txt", 'w+') as f_target:
+    # 处理最后一批行数少于10万的
+    with open(target_dir + "ftp_" + str(name) + ".txt", 'w+', encoding='utf-8') as f_target:
         for data in dataList:
             f_target.write(data)
 
@@ -48,3 +47,10 @@ def Main():
 
 if __name__ == "__main__":
     Main()
+
+    import glob
+
+    # 查看并读取拆分后的所有文件
+    txts = glob.glob('../data/origin/*.txt')
+    for txt in txts:
+        print(txt)
