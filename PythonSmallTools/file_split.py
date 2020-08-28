@@ -16,12 +16,8 @@ def Main():
     target_dir = 'origin/'  # 接受拆分文件的文件夹
 
     flag = 0   # 计数器，用于控制多少行分成一个文件
-
     name = 1  # 文件名
-
-    # 存放数据
-    dataList = []
-
+    dataList = []  # 存放数据
     print("开始。。。。。")
     print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     with open(source_dir, 'r', encoding='utf-8') as f_source:
