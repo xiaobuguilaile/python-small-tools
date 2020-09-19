@@ -19,7 +19,20 @@ def get_time(func):
     return wrapper
 
 
-@get_time
+def timmer(func):
+    def deco(*args, **kwargs):
+        print('\n函数：\033[32;1m{_funcname_}()\033[0m 开始运行：'.format(_funcname_=func.__name__))
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        end_time = time.time()
+        print('函数: \033[32;1m{_funcname_}()\033[0m 运行了 {_time_}秒'
+              .format(_funcname_=func.__name__, _time_=(end_time - start_time)))
+        return res
+
+    return deco
+
+
+@timmer
 def test():
     time.sleep(3)
 
